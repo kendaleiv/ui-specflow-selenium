@@ -45,6 +45,9 @@
     <Reference Include="WebDriver">
       <HintPath>..\packages\Selenium.WebDriver.2.40.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
+    <Reference Include="WebDriver.Support">
+      <HintPath>..\packages\Selenium.Support.2.40.0\lib\net40\WebDriver.Support.dll</HintPath>
+    </Reference>
     <Reference Include="xunit">
       <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
     </Reference>
@@ -66,7 +69,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SimpleWebBrowser.feature</DependentUpon>
     </Compile>
+    <Compile Include="WebBrowserWaitSteps.cs" />
     <Compile Include="WebBrowser.cs" />
+    <Compile Include="WebBrowserWait.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebBrowserWait.feature</DependentUpon>
+    </Compile>
     <Compile Include="WebDriverStepsBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +88,10 @@
     <None Include="SimpleWebBrowser.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SimpleWebBrowser.feature.cs</LastGenOutput>
+    </None>
+    <None Include="WebBrowserWait.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>WebBrowserWait.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

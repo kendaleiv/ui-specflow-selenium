@@ -26,5 +26,10 @@ namespace Web.Controllers
 
             return View();
         }
+
+        public ActionResult WaitTesting()
+        {
+            return View();
+        }
     }
 }

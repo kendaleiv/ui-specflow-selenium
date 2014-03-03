@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Wait Testing";
+}
+
+@section scripts {
+    <script>
+        (function ($) {
+
+            setTimeout(function () {
+                var h2 = $('<h2 id="hidden-for-five-seconds">5 seconds elapsed!</h2>');
+                $('body').append(h2);
+            }, 1000 * 5);
+
+        })(jQuery);
+    </script>
+}
