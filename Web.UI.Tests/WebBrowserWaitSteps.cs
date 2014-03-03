@@ -13,10 +13,7 @@ namespace Web.UI.Tests
         public void IWaitForElementWithIdToExist(string id)
         {
             var wait = new WebDriverWait(Driver, TimeSpan.FromMinutes(1));
-            wait.Until<IWebElement>(x =>
-            {
-                return x.FindElement(By.Id(id));
-            });
+            wait.Until<IWebElement>(ExpectedConditions.ElementExists(By.Id(id)));
         }
 
         [Then(@"I expect that the element with id (.*) exists")]
