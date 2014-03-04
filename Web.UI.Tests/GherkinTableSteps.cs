@@ -38,6 +38,17 @@ namespace Web.UI.Tests
             Assert.Equal(instructor, course.Instructor);
         }
 
+        [Then(@"I should see (.*) is scheduled for (.*)")]
+        public void ThenIShouldSeeIntroductionToCommandIsScheduledForAM(string name, string scheduled)
+        {
+            var scheduledDateTime = DateTime.Parse(scheduled);
+
+            var course = Courses.Single(
+                x => string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase));
+
+            Assert.Equal(scheduledDateTime, course.Scheduled);
+        }
+
         public class CourseInformation
         {
             public string Name { get; set; }

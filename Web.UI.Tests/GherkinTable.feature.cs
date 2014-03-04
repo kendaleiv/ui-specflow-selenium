@@ -161,6 +161,50 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
+        [Xunit.FactAttribute()]
+        [Xunit.TraitAttribute("FeatureTitle", "GherkinTable")]
+        [Xunit.TraitAttribute("Description", "Verify scheduled datetime for course")]
+        public virtual void VerifyScheduledDatetimeForCourse()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify scheduled datetime for course", ((string[])(null)));
+#line 26
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name",
+                        "Instructor",
+                        "Location",
+                        "Scheduled"});
+            table3.AddRow(new string[] {
+                        "Introduction to Command",
+                        "Janeway",
+                        "Ready Room",
+                        "4/3/2014 8:00 AM"});
+            table3.AddRow(new string[] {
+                        "Logic And You",
+                        "Tuvok",
+                        "Starboard Large Meeting Room",
+                        "4/3/2014 9:00 AM"});
+            table3.AddRow(new string[] {
+                        "Warp Core Basics",
+                        "Torres",
+                        "Engineering Meeting Room 3",
+                        "4/3/2014 9:00 AM"});
+            table3.AddRow(new string[] {
+                        "Fundamental of Cooking",
+                        "Neelix",
+                        "Mess Hall",
+                        "4/3/2014 10:00 AM"});
+#line 27
+ testRunner.Given("I have the course information", ((string)(null)), table3, "Given ");
+#line 33
+ testRunner.When("I get a list of available courses", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 34
+ testRunner.Then("I should see Introduction to Command is scheduled for 4/3/2014 8:00 AM", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable
