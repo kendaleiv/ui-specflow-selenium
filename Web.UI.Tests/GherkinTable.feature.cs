@@ -103,7 +103,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Engineering Meeting Room 3",
                         "4/3/2014 9:00 AM"});
             table1.AddRow(new string[] {
-                        "Fundamental of Cooking",
+                        "Fundamentals of Cooking",
                         "Neelix",
                         "Mess Hall",
                         "4/3/2014 10:00 AM"});
@@ -147,7 +147,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Engineering Meeting Room 3",
                         "4/3/2014 9:00 AM"});
             table2.AddRow(new string[] {
-                        "Fundamental of Cooking",
+                        "Fundamentals of Cooking",
                         "Neelix",
                         "Mess Hall",
                         "4/3/2014 10:00 AM"});
@@ -191,7 +191,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Engineering Meeting Room 3",
                         "4/3/2014 9:00 AM"});
             table3.AddRow(new string[] {
-                        "Fundamental of Cooking",
+                        "Fundamentals of Cooking",
                         "Neelix",
                         "Mess Hall",
                         "4/3/2014 10:00 AM"});
