@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Effective UI testing with SpecFlow + Selenium</title>
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <div class="slides">
+                <section>
+                    <h1>ui-specflow-selenium</h1>
+                    <br />
+                    <br />
+                    <h3>Effective UI testing with SpecFlow + Selenium</h3>
+                    <br>
+                    <p><a href="http://kendaleiv.com">Ken Dale</a> / <a href="http://twitter.com/kendaleiv">@kendaleiv</a></p>
+                </section>
+
+                <section>
+                    <h1>Graphical user interface testing</h1>
+                    <br />
+                    <blockquote cite="http://en.wikipedia.org/wiki/Graphical_user_interface_testing">In software engineering, graphical user interface testing is the process of testing a product's graphical user interface to ensure it meets its written specifications. This is normally done through the use of a variety of test cases.</blockquote>
+                    <a href="http://en.wikipedia.org/wiki/Graphical_user_interface_testing">http://en.wikipedia.org/wiki/Graphical_user_interface_testing</a>
+                    <br />
+                    <br />
+                    <br />
+                    <small><strong>(UI Testing)</strong></small>
+                </section>
+
+                <section>
+                    <h1>Benefits</h1>
+                    <br />
+                    <ul>
+                        <li>Full end-to-end verification that the application works</li>
+                        <li>Uses the application in the same manner as a user<br />(an ultra-caffinated one...)</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>Drawbacks</h1>
+                    <br />
+                    Ricky Bobby speed can break things that work at human speed.
+                    <br />
+                    <br />
+                    and &hellip;
+                    <aside class="notes">
+                        - Ricky Bobby speed can break things that 'just work' at human speed.
+                            - Browser animations, ajax requests updating the DOM...
+                            - Eventual consistency might eventually hit you in the face (if you aren't prepared!)
+                        - Eventual consistency
+                            - For your use case it might make sense to disable eventual consistency components of databases impacted by these issues. Or, handle them in some other manner. (but, you should be doing something!)
+                    </aside>
+                </section>
+
+                <section>
+                    <h1>Can be slow</h1>
+                    <br />
+                    <br />
+                    <img src="https://i.chzbgr.com/maxW500/1351319808/h1455EC2D/" />
+                </section>
+
+                <section>
+                    <h1>and</h1>
+                </section>
+
+                <section>
+                    <h1>annoying</h1>
+                    <br />
+                    <br />
+                    <img src="https://i.chzbgr.com/maxW500/7949882624/hF0A616A6/" />
+                </section>
+
+                <section>
+                    <strong>Especially if things are done poorly.</strong>
+                    <br />
+                    <br />
+                    <br />
+                    <ul>
+                        <li>Intermittent test failures</li>
+                        <li>One light goes out, they all go out!<br /><small>(looking at you, browser modal dialogs)</small></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>SpecFlow</h1>
+                    <br />
+                    <blockquote cite="https://github.com/techtalk/SpecFlow">SpecFlow is a pragmatic BDD solution for .NET. It uses the Gherkin specification language and integrates to many development tools (VS2008, VS2010, MonoDevelop, SharpDevelop, MsBuild). It provides efficient testing solution for the .NET-related platforms, like .NET 3.5, .NET4.0 , Mono, Silverlight 3, Silverlight 4 or Windows Phone 7.</blockquote>
+                    <small><a href="https://github.com/techtalk/SpecFlow">https://github.com/techtalk/SpecFlow</a></small>
+                </section>
+
+                <section>
+                    <h1>Setup</h1>
+                    <br />
+                    <ul>
+                        <li>Install NuGet(s)</li>
+                        <li>Install test runners (if necessary)</li>
+                        <li>Write smoke test (if you want to verify working)</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>Gherkin</h1>
+                    <br />
+                    <blockquote cite="https://github.com/cucumber/cucumber/wiki/Gherkin">Gherkin is the language that Cucumber understands. It is a Business Readable, Domain Specific Language that lets you describe software’s behaviour without detailing how that behaviour is implemented.</blockquote>
+                    <small><a href="https://github.com/cucumber/cucumber/wiki/Gherkin">https://github.com/cucumber/cucumber/wiki/Gherkin</a></small>
+                </section>
+
+                <section>
+                    <h1>Given, When, Then</h1>
+                    <br />
+                    <pre><code data-trim contenteditable>
+Scenario: Verify SpecFlow is working
+    Given I have 100 marbles
+    When I give away 5 marbles
+    Then I should have 95 marbles
+                    </code></pre>
+                    <br />
+                    <strong>Note:</strong> Multiple <code>Given</code> <code>When</code> <code>Then</code> are supported.
+                    <br />
+                    Can use <code>and</code> too!
+                </section>
+
+                <section>
+                    <h1>Why Gherkin</h1>
+                    <br />
+                    <ul>
+                        <li>English readable</li>
+                        <li>Powerful reusable bindings</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>SpecFlow bindings</h1>
+                    <pre><code data-trim contenteditable>
+[Binding]
+public class SimpleSteps
+{
+    private static int MarblesCount;
+
+    [Given(@"I have (.*) marbles")]
+    public void GivenIHaveMarbles(int count)
+    {
+        MarblesCount = count;
+    }
+
+    [When(@"I give away (.*) marbles")]
+    public void WhenIGiveAwayMarbles(int count)
+    {
+        MarblesCount = MarblesCount - count;
+    }
+
+    [Then(@"I should have (.*) marbles")]
+    public void ThenIShouldHaveMarbles(int count)
+    {
+        Assert.Equal(count, MarblesCount);
+    }
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h1>Running tests</h1>
+                    <br />
+                    Run bindings matching each line of Gherkin in sequential order.
+                    <br />
+                    <br />
+                    Use asserts, typically in <code>Then</code> bindings,<br />just like MSTest, NUnit, xUnit.
+                    <br />
+                    <br />
+                    SpecFlow uses NUnit by default. Can be changed to xUnit.
+                </section>
+
+                <section>
+                    <h1>Selenium WebDriver</h1>
+                    <br />
+                    Programatically operates web browsers
+                    <br />
+                    <br />
+                    <blockquote cite="http://docs.seleniumhq.org/projects/webdriver/">AndroidDriver, ChromeDriver, EventFiringWebDriver, FirefoxDriver, HtmlUnitDriver, InternetExplorerDriver, IPhoneDriver, PhantomJSDriver, RemoteWebDriver, SafariDriver</blockquote>
+                    <small><a href="http://docs.seleniumhq.org/projects/webdriver/">http://docs.seleniumhq.org/projects/webdriver/</a></small>
+                </section>
+
+                <section>
+                    <h1>Setup</h1>
+                    <br />
+                    <ul>
+                        <li>Install NuGet(s) (Selenium.Support is separate)</li>
+                        <li>Recommended: Install a ChromeDriver NuGet</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>Binding Usage</h1>
+                    <br />
+                    <pre><code data-trim contenteditable>
+[When(@"I click (.*) on the navbar")]
+public void WhenIClickOnTheNavbar(string linkText)
+{
+    var nav = Driver.FindElement(By.ClassName("nav"));
+    var link = nav.FindElement(By.LinkText(linkText));
+
+    link.Click();
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h1>Effective UI tests</h1>
+                    <br />
+                    <strong>Well organized bindings:</strong>
+                    <br />
+                    <br />
+                    <ul>
+                        <li>Common bindings</li>
+                        <li>Web browser bindings</li>
+                        <li>Database specific bindings</li>
+                        <li>...</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>Waiting for browser</h1>
+                    <br />
+                    When running a browser at super speed,
+                    <br />
+                    sometimes you need to wait before proceeding.
+                    <br />
+                    <br />
+                    <img src="https://i.chzbgr.com/maxW500/7949875968/h0C07EAFD/" />
+                </section>
+
+                <section>
+                    <h1>Do it right</h1>
+                    <br />
+                    If possible, avoid waiting for arbitrary lengths of time.
+                    <br />
+                    Instead, wait for what you <strong>actually need to occur</strong>.
+                </section>
+
+                <section>
+                     <pre><code data-trim contenteditable>
+[When("I wait for element with id (.*) to exist")]
+public void IWaitForElementWithIdToExist(string id)
+{
+    var wait = new WebDriverWait(Driver, TimeSpan.FromMinutes(1));
+    wait.Until&lt;IWebElement&gt;(ExpectedConditions.ElementExists(By.Id(id)));
+}
+                     </code></pre>
+                     <small>Requires the <strong>Selenium.Support</strong> NuGet package</small>
+                </section>
+
+                <section>
+                    <h1>Eventual consistency</h1>
+                    <br />
+                    <br />
+                    If you have that concern, handle it appropriately.
+                </section>
+
+                <section>
+                    <h1>Friendly warning</h1>
+                    If you accidently use the production database while running<br />UI tests, you could destroy the production database...
+                    <img src="https://i.chzbgr.com/maxW500/7969189376/hD3062957/" />
+                </section>
+
+                <section>
+                    <h2>Questions?</h2>
+                    <p><a href="http://kendaleiv.com">Ken Dale</a> / <a href="http://twitter.com/kendaleiv">@kendaleiv</a></p>
+                </section>
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
