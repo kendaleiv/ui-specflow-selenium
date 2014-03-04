@@ -41,7 +41,7 @@ namespace Web.UI.Tests
         }
 
         [Then(@"I should see (.*) is scheduled for (.*)")]
-        public void ThenIShouldSeeIntroductionToCommandIsScheduledForAM(string name, string scheduled)
+        public void ThenIShouldSeeIsScheduledFor(string name, string scheduled)
         {
             var scheduledDateTime = DateTime.Parse(scheduled);
 
