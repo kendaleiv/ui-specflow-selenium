@@ -34,8 +34,8 @@ namespace Web.UI.Tests
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GherkinTable", "In order to demonstrate Gherkin tables\nAs a developer\nI want to do some simple te" +
-                    "sts using Gherkin tables", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GherkinTable", "In order to demonstrate Gherkin tables\r\nAs a developer\r\nI want to do some simple " +
+                    "tests using Gherkin tables", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -113,6 +113,50 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("I get a list of available courses", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 14
  testRunner.Then("I should see there are 4 courses", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.FactAttribute()]
+        [Xunit.TraitAttribute("FeatureTitle", "GherkinTable")]
+        [Xunit.TraitAttribute("Description", "Get instructor for course")]
+        public virtual void GetInstructorForCourse()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get instructor for course", ((string[])(null)));
+#line 16
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name",
+                        "Instructor",
+                        "Location",
+                        "Scheduled"});
+            table2.AddRow(new string[] {
+                        "Introduction to Command",
+                        "Janeway",
+                        "Ready Room",
+                        "4/3/2014 8:00 AM"});
+            table2.AddRow(new string[] {
+                        "Logic And You",
+                        "Tuvok",
+                        "Starboard Large Meeting Room",
+                        "4/3/2014 9:00 AM"});
+            table2.AddRow(new string[] {
+                        "Warp Core Basics",
+                        "Torres",
+                        "Engineering Meeting Room 3",
+                        "4/3/2014 9:00 AM"});
+            table2.AddRow(new string[] {
+                        "Fundamental of Cooking",
+                        "Neelix",
+                        "Mess Hall",
+                        "4/3/2014 10:00 AM"});
+#line 17
+ testRunner.Given("I have the course information", ((string)(null)), table2, "Given ");
+#line 23
+ testRunner.When("I get a list of available courses", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 24
+ testRunner.Then("I should see Janeway is instructing Introduction to Command", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

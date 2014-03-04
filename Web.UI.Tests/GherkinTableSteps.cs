@@ -29,6 +29,15 @@ namespace Web.UI.Tests
             Assert.Equal(count, Courses.Count());
         }
 
+        [Then(@"I should see (.*) is instructing (.*)")]
+        public void ThenIShouldSeeIsInstructing(string instructor, string name)
+        {
+            var course = Courses.Single(
+                x => string.Equals(x.Name, name, StringComparison.OrdinalIgnoreCase));
+
+            Assert.Equal(instructor, course.Instructor);
+        }
+
         public class CourseInformation
         {
             public string Name { get; set; }
