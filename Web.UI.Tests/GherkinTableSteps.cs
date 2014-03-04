@@ -21,6 +21,8 @@ namespace Web.UI.Tests
         [When(@"I get a list of available courses")]
         public void WhenIGetAListOfAvailableCourses()
         {
+            // If this was an actual UI test
+            // We might be invoking the browser here.
         }
 
         [Then(@"I should see there are (.*) courses")]
