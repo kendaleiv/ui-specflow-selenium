@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System;
 using System.IO;
 using TechTalk.SpecFlow;
 using Xunit;
@@ -39,8 +40,8 @@ namespace Web.UI.Tests
 
         private static string GetFullUrl(string relativeUrl)
         {
-            var uri = Path.Combine(AppRootUrl, relativeUrl.TrimStart('/')).Replace("\\", "/");
-            return uri;
+            var uri = new Uri(Path.Combine(AppRootUrl, relativeUrl.TrimStart('/')).Replace("\\", "/"));
+            return uri.AbsoluteUri;
         }
     }
 }
