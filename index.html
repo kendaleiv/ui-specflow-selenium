@@ -185,6 +185,29 @@ public class SimpleSteps
                 </section>
 
                 <section>
+                    <h1>Gherkin Tables</h1>
+                    <br />
+                    <pre><code data-trim contenteditable>
+Scenario: Get instructor for course
+Given I have the course information
+| Name                    | Instructor | Location                     | Scheduled         |
+| Introduction to Command | Janeway    | Ready Room                   | 4/3/2014 8:00 AM  |
+| Logic And You           | Tuvok      | Starboard Large Meeting Room | 4/3/2014 9:00 AM  |
+| Warp Core Basics        | Torres     | Engineering Meeting Room 3   | 4/3/2014 9:00 AM  |
+| Fundamentals of Cooking | Neelix     | Mess Hall                    | 4/3/2014 10:00 AM |
+When I get a list of available courses
+Then I should see Janeway is instructing Introduction to Command
+                    </code></pre>
+                    <pre><code data-trim contenteditable>
+[Given(@"I have the course information")]
+public void GivenIHaveTheCourseInformation(Table table)
+{
+    Courses = table.CreateSet&lt;CourseInformation&gt;();
+}
+                    </code></pre>
+                </section>
+
+                <section>
                     <h1>Running tests</h1>
                     <br />
                     Run bindings matching each line of Gherkin in sequential order.
