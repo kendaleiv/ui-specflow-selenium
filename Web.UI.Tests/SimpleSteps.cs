@@ -18,7 +18,10 @@ namespace Web.UI.Tests
         [When(@"I give away (.*) marbles")]
         public void WhenIGiveAwayMarbles(int count)
         {
-            MarblesCount = Math.Max(0, MarblesCount - count);
+            if (count > MarblesCount)
+                throw new ArgumentOutOfRangeException("count must be less than to equal to MarblesCount.");
+
+            MarblesCount = MarblesCount - count;
         }
 
         [Then(@"I should have (.*) marbles")]
