@@ -1,4 +1,5 @@
-﻿using TechTalk.SpecFlow;
+﻿using System;
+using TechTalk.SpecFlow;
 using Xunit;
 
 namespace Web.UI.Tests
@@ -17,7 +18,7 @@ namespace Web.UI.Tests
         [When(@"I give away (.*) marbles")]
         public void WhenIGiveAwayMarbles(int count)
         {
-            MarblesCount = MarblesCount - count;
+            MarblesCount = Math.Max(0, MarblesCount - count);
         }
 
         [Then(@"I should have (.*) marbles")]
