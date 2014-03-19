@@ -172,6 +172,9 @@ public class SimpleSteps
     [When(@"I give away (.*) marbles")]
     public void WhenIGiveAwayMarbles(int count)
     {
+        if (count > MarblesCount)
+            throw new ArgumentOutOfRangeException("count must be less than to equal to MarblesCount.");
+
         MarblesCount = MarblesCount - count;
     }
 
